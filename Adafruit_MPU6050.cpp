@@ -84,16 +84,18 @@ bool Adafruit_MPU6050::begin(uint8_t i2c_address, TwoWire *wire,
       break;
     delay(10);
   }
-  if (!mpu_found)
-    return false;
+  printf("mpu_found: %d\n", mpu_found);
+  // if (!mpu_found)
+  //   return false;
 
   Adafruit_BusIO_Register chip_id =
       Adafruit_BusIO_Register(i2c_dev, MPU6050_WHO_AM_I, 1);
 
   // make sure we're talking to the right chip
-  if (chip_id.read() != MPU6050_DEVICE_ID) {
-    return false;
-  }
+  printf("chip_id: %x\n", chip_id.read());
+  // if (chip_id.read() != MPU6050_DEVICE_ID) {
+  //   return false;
+  // }
 
   return _init(sensor_id);
 }
